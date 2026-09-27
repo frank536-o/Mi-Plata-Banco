@@ -3,192 +3,272 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Plata - Financial Bank</title>
+    <title>Mi Plata - Banca Digital</title>
     <link rel="stylesheet" href="styles.css">
-    <!-- Iconos de FontAwesome -->
+    <!-- FontAwesome para los íconos idénticos al Figma -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-    <!-- Header / Navbar -->
-    <header class="main-header">
-        <div class="logo-container">
-            <i class="fa-solid fa-building-columns logo-icon"></i>
-            <h1>MI PLATA <span>FINANCIAL BANK</span></h1>
+    <!-- NAVEGACIÓN -->
+    <header class="navbar">
+        <div class="logo">
+            <i class="fa-solid fa-building-columns"></i>
+            <span>Mi Plata</span>
         </div>
-        <nav class="main-nav">
-            <button id="btn-nav-login" class="btn btn-outline"><i class="fa-solid fa-right-to-bracket"></i> Iniciar Sesión</button>
-            <button id="btn-nav-register" class="btn btn-primary"><i class="fa-solid fa-user-plus"></i> Registrarse</button>
+        <nav class="nav-links">
+            <a href="#inicio">Inicio</a>
+            <a href="#quienes-somos">Quiénes Somos</a>
+            <a href="#productos">Productos</a>
+            <a href="#contactanos">Contáctanos</a>
         </nav>
+        <div class="nav-buttons">
+            <button class="btn btn-outline" id="btn-iniciar-sesion"><i class="fa-solid fa-arrow-right-to-bracket"></i> Iniciar Sesión</button>
+            <button class="btn btn-primary" id="btn-registrarse"><i class="fa-solid fa-plus"></i> Registrarse</button>
+        </div>
     </header>
 
-    <!-- Contenido Principal (Landing & App) -->
-    <main class="main-container">
-
-        <!-- Banner Principal (Hero - Maqueta Desktop Banner) -->
-        <section id="hero-section" class="hero-card">
+    <!-- CONTENEDOR PRINCIPAL (Landing Page) -->
+    <main id="landing-page">
+        
+        <!-- SECCIÓN: INICIO (Hero) -->
+        <section id="inicio" class="hero-section">
             <div class="hero-content">
-                <h2>Bienvenido a la sucursal web de <span>Mi Plata</span></h2>
+                <span class="badge badge-dark">BANCA DIGITAL 2026</span>
+                <h1>Bienvenido a la sucursal web de <span>Mi Plata</span></h1>
                 <p>Gestiona tus Cuentas de Ahorros, Corriente y Tarjetas de Crédito de forma rápida y segura.</p>
                 <div class="hero-actions">
-                    <button class="btn btn-lg btn-primary" onclick="mostrarSeccion('login-section')">Acceder al Cajero Web</button>
+                    <button class="btn btn-primary btn-lg">Acceder al Cajero Web</button>
+                    <a href="#productos" class="btn btn-outline btn-lg">Ver Productos</a>
+                </div>
+            </div>
+            
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <h3>+10K</h3>
+                    <p>Clientes activos</p>
+                </div>
+                <div class="stat-item">
+                    <h3>100%</h3>
+                    <p>Seguridad digital</p>
+                </div>
+                <div class="stat-item">
+                    <h3>24/7</h3>
+                    <p>Disponibilidad</p>
+                </div>
+                <div class="stat-item">
+                    <h3>3</h3>
+                    <p>Productos bancarios</p>
                 </div>
             </div>
         </section>
 
-        <!-- Grilla de Accesos Rápida (Maqueta: 4 bloques inferiores) -->
-        <section id="services-grid" class="services-grid">
-            <div class="service-card">
-                <i class="fa-solid fa-piggy-bank service-icon"></i>
-                <h3>Cuenta de Ahorros</h3>
-                <p>Genera rendimientos de forma segura con abonos directos.</p>
-            </div>
-            <div class="service-card">
-                <i class="fa-solid fa-wallet service-icon"></i>
-                <h3>Cuenta Corriente</h3>
-                <p>Gestiona tus pagos con margen de sobregiro hasta del 20%.</p>
-            </div>
-            <div class="service-card">
-                <i class="fa-solid fa-credit-card service-icon"></i>
-                <h3>Tarjeta de Crédito</h3>
-                <p>Financia tus compras a cuotas con tasas competitivas.</p>
-            </div>
-            <div class="service-card">
-                <i class="fa-solid fa-arrow-right-arrow-left service-icon"></i>
-                <h3>Transacciones</h3>
-                <p>Transferencias entre cuentas e historial detallado de movimientos.</p>
+        <!-- SECCIÓN: QUIÉNES SOMOS -->
+        <section id="quienes-somos" class="about-section">
+            <div class="about-container">
+                <div class="about-text">
+                    <span class="badge badge-light">NUESTRA HISTORIA</span>
+                    <h2>¿Quiénes somos?</h2>
+                    <p><strong>Mi Plata</strong> es una plataforma bancaria digital diseñada para acercar los servicios financieros a todas las personas. Nacimos con la misión de simplificar la gestión del dinero, brindando herramientas modernas, seguras y accesibles desde cualquier dispositivo.</p>
+                    <p>Somos un equipo de estudiantes de Desarrollo de Software del CESDE, comprometidos con construir soluciones tecnológicas que impacten positivamente la vida de las personas. Nuestro proyecto aplica los principios de la Programación Orientada a Objetos para modelar un sistema bancario real y funcional.</p>
+                    
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <i class="fa-solid fa-building-columns feature-icon"></i>
+                            <h4>Misión</h4>
+                            <p>Democratizar el acceso a los servicios bancarios digitales.</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fa-solid fa-bullseye feature-icon"></i>
+                            <h4>Visión</h4>
+                            <p>Ser el cajero web más intuitivo y seguro de Colombia.</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fa-solid fa-lock feature-icon"></i>
+                            <h4>Seguridad</h4>
+                            <p>Máxima protección con validación de intentos y bloqueo automático.</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fa-solid fa-handshake feature-icon"></i>
+                            <h4>Compromiso</h4>
+                            <p>Transparencia y confianza en cada transacción.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <div class="circle-graphic">
+                        <div class="icon-float icon-lock"><i class="fa-solid fa-lock"></i></div>
+                        <div class="icon-float icon-heart"><i class="fa-solid fa-heart"></i></div>
+                        <i class="fa-solid fa-building-columns center-icon"></i>
+                        <h3>Mi Plata</h3>
+                        <p>Banca Digital</p>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- Módulo de Autenticación (Login) -->
-        <section id="login-section" class="auth-card hidden">
-            <h2><i class="fa-solid fa-lock"></i> Iniciar Sesión</h2>
-            <form id="form-login">
-                <div class="form-group">
-                    <label for="login-usuario">Nombre de Usuario</label>
-                    <input type="text" id="login-usuario" required placeholder="Ingresa tu usuario">
-                </div>
-                <div class="form-group">
-                    <label for="login-password">Contraseña</label>
-                    <input type="password" id="login-password" required placeholder="Ingresa tu contraseña">
-                </div>
-                <div class="intentos-info">
-                    <span>Intentos restantes: <strong id="contador-intentos">3</strong></span>
-                </div>
-                <button type="submit" class="btn btn-primary btn-block">Ingresar</button>
-            </form>
-            <p class="auth-switch">¿No tienes cuenta? <a href="#" id="link-to-register">Regístrate aquí</a></p>
-        </section>
-
-        <!-- Módulo de Registro -->
-        <section id="register-section" class="auth-card hidden">
-            <h2><i class="fa-solid fa-user-plus"></i> Registro de Cliente</h2>
-            <form id="form-register">
-                <div class="form-group">
-                    <label for="reg-nombre">Nombre Completo</label>
-                    <input type="text" id="reg-nombre" required placeholder="Ej: Juan Pérez">
-                </div>
-                <div class="form-group">
-                    <label for="reg-id">Número de Identificación (Cédula / Pasaporte)</label>
-                    <input type="text" id="reg-id" required placeholder="Ej: 1012345678">
-                </div>
-                <div class="form-group">
-                    <label for="reg-celular">Teléfono Celular</label>
-                    <input type="tel" id="reg-celular" required placeholder="Ej: 3001234567">
-                </div>
-                <div class="form-group">
-                    <label for="reg-usuario">Nombre de Usuario</label>
-                    <input type="text" id="reg-usuario" required placeholder="Crea un usuario único">
-                </div>
-                <div class="form-group">
-                    <label for="reg-password">Contraseña</label>
-                    <input type="password" id="reg-password" required placeholder="Mínimo 4 caracteres">
-                </div>
-                <div class="form-group">
-                    <label for="reg-password-confirm">Confirmar Contraseña</label>
-                    <input type="password" id="reg-password-confirm" required placeholder="Repite tu contraseña">
-                </div>
-                <button type="submit" class="btn btn-primary btn-block">Crear Cuenta Bancaria</button>
-            </form>
-            <p class="auth-switch">¿Ya tienes cuenta? <a href="#" id="link-to-login">Inicia sesión</a></p>
-        </section>
-
-        <!-- Panel del Cajero (Transacciones) -->
-        <section id="cajero-section" class="cajero-container hidden">
-            <div class="welcome-header">
-                <h2>Bienvenido, <span id="cliente-nombre-display">Usuario</span></h2>
-                <button id="btn-logout" class="btn btn-danger btn-sm"><i class="fa-solid fa-power-off"></i> Cerrar Sesión</button>
+        <!-- SECCIÓN: PRODUCTOS -->
+        <section id="productos" class="products-section">
+            <div class="section-header text-center">
+                <span class="badge badge-light">NUESTROS SERVICIOS</span>
+                <h2>Productos que ofrecemos</h2>
+                <p>Escoge el producto bancario que mejor se adapte a tus necesidades financieras.</p>
             </div>
-
-            <!-- Resumen de Productos -->
-            <div class="productos-grid">
-                <div class="producto-card">
+            
+            <div class="products-grid">
+                <!-- Cuenta de Ahorros -->
+                <div class="product-card card-ahorros">
+                    <div class="product-icon icon-pink"><i class="fa-solid fa-piggy-bank"></i></div>
+                    <span class="product-subtitle text-green">1.5% MENSUAL</span>
                     <h3>Cuenta de Ahorros</h3>
-                    <p class="producto-numero" id="ahorros-num">N° --</p>
-                    <p class="producto-saldo">Saldo: <strong id="ahorros-saldo">$0.00</strong></p>
+                    <p>Diseñada para el ahorro seguro con generación de rendimientos.</p>
+                    <ul class="product-features">
+                        <li><i class="fa-solid fa-check text-green"></i> Consignación y retiro de dinero</li>
+                        <li><i class="fa-solid fa-arrow-trend-up text-blue"></i> Interés mensual del 1.5% al retirar</li>
+                        <li><i class="fa-solid fa-lock text-orange"></i> No supera el saldo disponible</li>
+                    </ul>
+                    <button class="btn btn-primary btn-block mt-auto">Abrir Cuenta de Ahorros</button>
                 </div>
-                <div class="producto-card">
+
+                <!-- Cuenta Corriente -->
+                <div class="product-card card-corriente">
+                    <div class="product-icon icon-blue"><i class="fa-solid fa-credit-card"></i></div>
+                    <span class="product-subtitle text-yellow">SOBREGIRO 20%</span>
                     <h3>Cuenta Corriente</h3>
-                    <p class="producto-numero" id="corriente-num">N° --</p>
-                    <p class="producto-saldo">Saldo: <strong id="corriente-saldo">$0.00</strong></p>
+                    <p>Para la gestión diaria del dinero con mayor flexibilidad.</p>
+                    <ul class="product-features">
+                        <li><i class="fa-solid fa-check text-green"></i> Recibe nómina y paga facturas</li>
+                        <li><i class="fa-solid fa-arrows-rotate text-blue"></i> Transferencias frecuentes</li>
+                        <li><i class="fa-solid fa-sack-dollar text-orange"></i> Sobregiro permitido hasta 20%</li>
+                    </ul>
+                    <button class="btn btn-yellow btn-block mt-auto">Abrir Cuenta Corriente</button>
                 </div>
-                <div class="producto-card">
+
+                <!-- Tarjeta de Crédito -->
+                <div class="product-card card-tarjeta">
+                    <div class="product-icon icon-teal"><i class="fa-regular fa-gem"></i></div>
+                    <span class="product-subtitle text-teal">DESDE 0% INTERÉS</span>
                     <h3>Tarjeta de Crédito</h3>
-                    <p class="producto-numero" id="tarjeta-num">N° --</p>
-                    <p class="producto-saldo">Deuda: <strong id="tarjeta-deuda">$0.00</strong> / Cupo: <span id="tarjeta-cupo">$0.00</span></p>
-                </div>
-            </div>
-
-            <!-- Menú de Operaciones -->
-            <div class="operaciones-panel">
-                <h3>Panel de Operaciones</h3>
-                <div class="operaciones-buttons">
-                    <button class="btn btn-secondary" onclick="mostrarOperacion('consignar')"><i class="fa-solid fa-money-bill-wave"></i> Consignar</button>
-                    <button class="btn btn-secondary" onclick="mostrarOperacion('retirar')"><i class="fa-solid fa-hand-holding-dollar"></i> Retirar</button>
-                    <button class="btn btn-secondary" onclick="mostrarOperacion('transferir')"><i class="fa-solid fa-arrows-rotate"></i> Transferir</button>
-                    <button class="btn btn-secondary" onclick="mostrarOperacion('compra-tarjeta')"><i class="fa-solid fa-cart-shopping"></i> Comprar con Tarjeta</button>
-                    <button class="btn btn-secondary" onclick="mostrarOperacion('movimientos')"><i class="fa-solid fa-list-check"></i> Ver Movimientos</button>
-                </div>
-            </div>
-
-            <!-- Area Dinámica de Formularios de Operación -->
-            <div id="operacion-area" class="operacion-card hidden">
-                <!-- Se llena dinámicamente con JavaScript -->
-            </div>
-
-            <!-- Contenedor del Historial de Movimientos -->
-            <div id="historial-area" class="historial-card hidden">
-                <h3>Historial de Movimientos</h3>
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Fecha y Hora</th>
-                                <th>Tipo de Transacción</th>
-                                <th>Monto</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tabla-movimientos-body">
-                            <!-- Filas inyectadas con JS -->
-                        </tbody>
+                    <p>Financia tus compras a cuotas con tasas competitivas.</p>
+                    <ul class="product-features mb-3">
+                        <li><i class="fa-solid fa-check text-green"></i> ≤ 2 cuotas: sin interés</li>
+                        <li><i class="fa-solid fa-chart-pie text-blue"></i> 3-6 cuotas: 1.9% mensual</li>
+                        <li><i class="fa-solid fa-chart-simple text-orange"></i> ≥ 7 cuotas: 2.3% mensual</li>
+                    </ul>
+                    <table class="rates-table">
+                        <tr><th>Cuotas</th><th>Tasa mensual</th></tr>
+                        <tr><td>≤ 2 cuotas</td><td>0% — Sin interés</td></tr>
+                        <tr><td>3 – 6 cuotas</td><td>1.9% mensual</td></tr>
+                        <tr><td>≥ 7 cuotas</td><td>2.3% mensual</td></tr>
                     </table>
+                    <button class="btn btn-teal btn-block mt-auto">Solicitar Tarjeta</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN: CONTÁCTANOS -->
+        <section id="contactanos" class="contact-section">
+            <div class="section-header text-center">
+                <span class="badge badge-light">ESTAMOS AQUÍ</span>
+                <h2>Contáctanos</h2>
+                <p>¿Tienes preguntas? Escríbenos y te responderemos a la brevedad.</p>
+            </div>
+
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="info-item">
+                        <div class="info-icon text-pink"><i class="fa-solid fa-location-dot"></i></div>
+                        <div>
+                            <h4>Dirección</h4>
+                            <p>Medellín, Antioquia — Colombia</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon text-blue"><i class="fa-solid fa-phone"></i></div>
+                        <div>
+                            <h4>Teléfono</h4>
+                            <p>+57 (4) 123 4567</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon text-purple"><i class="fa-solid fa-envelope"></i></div>
+                        <div>
+                            <h4>Correo</h4>
+                            <p>soporte@miplata.com.co</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon text-gray"><i class="fa-solid fa-clock"></i></div>
+                        <div>
+                            <h4>Horario</h4>
+                            <p>Lun – Vie: 8:00 am – 6:00 pm</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form-card">
+                    <form id="form-contacto">
+                        <div class="form-group">
+                            <label>Nombre completo</label>
+                            <input type="text" placeholder="Tu nombre">
+                        </div>
+                        <div class="form-group">
+                            <label>Correo electrónico</label>
+                            <input type="email" placeholder="tu@correo.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Mensaje</label>
+                            <textarea rows="4" placeholder="¿En qué podemos ayudarte?"></textarea>
+                        </div>
+                        <button type="button" class="btn btn-primary btn-block">Enviar mensaje</button>
+                    </form>
                 </div>
             </div>
         </section>
 
     </main>
 
-    <!-- Footer Corporativo -->
+    <!-- FOOTER -->
     <footer class="main-footer">
-        <p>&copy; 2026 Mi Plata Financial Bank. Todos los derechos reservados.</p>
-        <div class="social-links">
-            <a href="#"><i class="fa-brands fa-facebook"></i></a>
-            <a href="#"><i class="fa-brands fa-twitter"></i></a>
-            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div class="logo">
+                    <i class="fa-solid fa-building-columns"></i>
+                    <span>Mi Plata</span>
+                </div>
+                <p>Tu sucursal bancaria digital. Gestiona tus finanzas desde cualquier lugar con seguridad y facilidad. Somos estudiantes de CESDE — Desarrollo de Software.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Navegación</h4>
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#quienes-somos">Quiénes Somos</a></li>
+                    <li><a href="#productos">Productos</a></li>
+                    <li><a href="#contactanos">Contáctanos</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links">
+                <h4>Productos</h4>
+                <ul>
+                    <li><a href="#">Cuenta de Ahorros</a></li>
+                    <li><a href="#">Cuenta Corriente</a></li>
+                    <li><a href="#">Tarjeta de Crédito</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Mi Plata. Todos los derechos reservados.</p>
+            <p>Proyecto de Aula — CESDE Desarrollo de Software</p>
         </div>
     </footer>
 
-    <!-- Scripts JS -->
     <script src="js/models.js"></script>
     <script src="js/app.js"></script>
 </body>
