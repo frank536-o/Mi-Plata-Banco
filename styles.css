@@ -55,6 +55,7 @@ ul { list-style: none; }
 .text-gray { color: var(--text-light); }
 
 /* ================= COMPONENTES (Botones y Badges) ================= */
+
 .btn {
     padding: 0.7rem 1.5rem;
     border-radius: 6px;
@@ -72,14 +73,14 @@ ul { list-style: none; }
 .btn-primary { 
     background-color: var(--primary); 
     color: var(--text-white); 
-    transition: all 0.3s ease; 
+    transition: all 0.2s ease; 
 }
 
 .btn-primary:hover { 
     background-color: var(--primary-hover); 
     color: var(--secondary); /* Las letras cambian al amarillo corporativo */
     transform: translateY(-3px); /* Efecto de realce hacia arriba */
-    box-shadow: 0 6px 15px rgba(0, 163, 108, 0.4); /* Sombra verde esmeralda */
+    /*box-shadow: 0 6px 15px rgba(0, 163, 108, 0.4); /* Sombra verde esmeralda */
 }
 
 /* Botón Secundario / Outline (Iniciar Sesión) */
@@ -87,7 +88,7 @@ ul { list-style: none; }
     background-color: transparent; 
     border: 2px solid var(--text-white); /* Borde un poco más grueso para que resalte la línea */
     color: var(--text-white); 
-    transition: all 0.3s ease; 
+    transition: all 0.2s ease; 
 }
 
 .btn-outline:hover { 
@@ -95,14 +96,14 @@ ul { list-style: none; }
     color: var(--secondary); /* Las letras cambian a amarillo */
     border-color: var(--secondary); /* La línea cambia a amarillo */
     transform: translateY(-3px); /* Efecto de realce hacia arriba */
-    box-shadow: 0 6px 15px rgba(244, 208, 63, 0.2); /* Sombra amarilla suave */
+   /* box-shadow: 0 6px 15px rgba(244, 208, 63, 0.2); /* Sombra amarilla suave */
 }
 
 .btn-yellow { background-color: var(--secondary); color: var(--text-dark); }
-.btn-yellow:hover { background-color: var(--secondary-hover); }
+.btn-yellow:hover { background-color: var(--secondary-hover); transform: translateY(-3px); }
 
 .btn-teal { background-color: var(--teal); color: var(--text-white); }
-.btn-teal:hover { background-color: #1A938C; }
+.btn-teal:hover { background-color: #1A938C; transform: translateY(-3px); }
 
 .btn-block { width: 100%; }
 .btn-lg { padding: 1rem 2rem; font-size: 1.1rem; }
@@ -115,6 +116,7 @@ ul { list-style: none; }
     letter-spacing: 1px;
     display: inline-block;
     margin-bottom: 1rem;
+   
 }
 
 .badge-dark { background-color: rgba(0, 163, 108, 0.2); color: var(--primary); }
@@ -155,7 +157,7 @@ ul { list-style: none; }
     font-weight: 500;
     position: relative; 
     padding-bottom: 5px; 
-    transition: color 0.3s ease;
+    transition: color 0.2s ease;
 }
 
 .nav-links a::after {
@@ -297,15 +299,25 @@ ul { list-style: none; }
     background: var(--bg-light);
     border-radius: 12px;
     padding: 2.5rem 2rem;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    box-shadow: 0 10px 24px rgba(0, 163, 108, 0.18);
     display: flex;
     flex-direction: column;
     border-top: 5px solid transparent;
+    transform: translateY(-3px);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.card-ahorros { border-top-color: var(--primary); }
-.card-corriente { border-top-color: var(--secondary); }
-.card-tarjeta { border-top-color: var(--teal); }
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 30px rgba(0, 163, 108, 0.28);
+}
+
+.card-ahorros { border-top-color: var(--primary);
+transform: translateY(-3px); /* Efecto de realce hacia arriba */  }
+.card-corriente { border-top-color: var(--secondary); 
+transform: translateY(-3px); /* Efecto de realce hacia arriba */  }
+.card-tarjeta { border-top-color: var(--teal); 
+transform: translateY(-3px); /* Efecto de realce hacia arriba */  }
 
 .product-icon {
     width: 50px; height: 50px;
@@ -416,7 +428,7 @@ ul { list-style: none; }
 .footer-links h4 { margin-bottom: 1.5rem; }
 .footer-links ul li { margin-bottom: 0.8rem; }
 .footer-links ul a { color: #BDC3C7; font-size: 0.9rem; transition: 0.3s; }
-.footer-links ul a:hover { color: var(--primary); }
+.footer-links ul a:hover { color: var(--secondary ); }
 
 .footer-bottom {
     display: flex;
