@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Plata - Sucursal Virtual</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body style="background-color: #f4f6f9; color: #333;">
+
+    <!-- BARRA DEL CAJERO -->
+    <header class="navbar" style="background-color: #0d1b2a; padding: 15px 5%;">
+        <div class="logo">
+            <i class="fa-solid fa-building-columns" style="color: #00a86b;"></i>
+            <span style="color: white; font-weight: bold; font-size: 20px;">Mi Plata | Sucursal Virtual</span>
+        </div>
+        <button id="btn-cerrar-sesion" class="btn btn-outline" style="border-color: #ff4d4d; color: #ff4d4d; cursor: pointer;">
+            <i class="fa-solid fa-right-from-bracket"></i> Cerrar Sesión
+        </button>
+    </header>
+
+    <!-- CONTENEDOR PRINCIPAL DEL CAJERO -->
+    <main style="max-width: 800px; margin: 40px auto; padding: 0 20px;">
+        <div class="cajero-card" style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);">
+            <h2 style="color: #0d1b2a; margin-bottom: 5px;">Bienvenido a tu Banca en Línea</h2>
+            <h3 id="nombreCliente" style="color: #00a86b; margin-bottom: 25px;">Cargando usuario...</h3>
+            
+            <!-- Selector de producto -->
+            <div class="form-group" style="margin-bottom: 20px;">
+                <label style="font-weight: bold; display: block; margin-bottom: 5px;">Seleccionar Producto:</label>
+                <select id="selectorCuenta" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc;">
+                    <option value="ahorros">Cuenta de Ahorros</option>
+                    <option value="corriente">Cuenta Corriente</option>
+                    <option value="tarjeta">Tarjeta de Crédito</option>
+                </select>
+            </div>
+
+            <!-- Pantalla de saldo -->
+            <div class="saldo-box" style="background: #eef9f5; padding: 20px; border-radius: 8px; border-left: 5px solid #00a86b; margin-bottom: 25px;">
+                <h4 id="saldoActual" style="font-size: 22px; color: #0d1b2a; margin: 0;">$ 0 COP</h4>
+            </div>
+
+            <!-- Formulario de operaciones -->
+            <form id="formOperacion">
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label style="font-weight: bold; display: block; margin-bottom: 5px;">Tipo de Operación:</label>
+                    <select id="tipoOperacion" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc;">
+                        <option value="consignar">Consignar / Abonar</option>
+                        <option value="retirar">Retirar / Comprar</option>
+                    </select>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label style="font-weight: bold; display: block; margin-bottom: 5px;">Monto ($):</label>
+                    <input type="number" id="montoOperacion" placeholder="Ingrese el valor" required style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc;">
+                </div>
+
+                <div class="form-group" id="grupoCuotas" style="display: none; margin-bottom: 15px;">
+                    <label style="font-weight: bold; display: block; margin-bottom: 5px;">Número de Cuotas (Solo Tarjeta):</label>
+                    <input type="number" id="numeroCuotas" min="1" value="1" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc;">
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block" style="width: 100%; padding: 12px; background-color: #00a86b; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer;">Ejecutar Transacción</button>
+            </form>
+
+            <!-- Historial de movimientos -->
+            <div class="movimientos-box" style="margin-top: 30px;">
+                <h3 style="color: #0d1b2a; border-bottom: 2px solid #eee; padding-bottom: 8px;">Historial de Movimientos</h3>
+                <ul id="listaMovimientos" style="list-style: none; padding: 0; margin-top: 15px;"></ul>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/models.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

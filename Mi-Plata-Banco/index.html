@@ -38,7 +38,7 @@
                 <h1>Bienvenido a la sucursal web de <span>Mi Plata</span></h1>
                 <p>Gestiona tus Cuentas de Ahorros, Corriente y Tarjetas de Crédito de forma rápida y segura.</p>
                 <div class="hero-actions">
-                    <button class="btn btn-primary btn-lg">Acceder al Cajero Web</button>
+                    <button class="btn btn-primary btn-lg" id="btn-acceder-cajero">Acceder al Cajero Web</button>
                     <a href="#productos" class="btn btn-outline btn-lg">Ver Productos</a>
                 </div>
             </div>
@@ -226,6 +226,58 @@
             </div>
         </section>
 
+        <!-- SECCIÓN: CAJERO WEB INTERACTIVO -->
+<section id="cajero-web" class="cajero-section" style="display: none;">
+            <div class="cajero-card">
+                <h2>Sucursal Virtual Mi Plata</h2>
+                <h3 id="nombreCliente">Cargando cliente...</h3>
+                
+                <!-- Selector de producto -->
+                <div class="form-group">
+                    <label>Seleccionar Producto:</label>
+                    <select id="selectorCuenta">
+                        <option value="ahorros">Cuenta de Ahorros</option>
+                        <option value="corriente">Cuenta Corriente</option>
+                        <option value="tarjeta">Tarjeta de Crédito</option>
+                    </select>
+                </div>
+
+                <!-- Pantalla de saldo -->
+                <div class="saldo-box">
+                    <h4 id="saldoActual">$ 0 COP</h4>
+                </div>
+
+                <!-- Formulario de operaciones -->
+                <form id="formOperacion">
+                    <div class="form-group">
+                        <label>Tipo de Operación:</label>
+                        <select id="tipoOperacion">
+                            <option value="consignar">Consignar / Abonar</option>
+                            <option value="retirar">Retirar / Comprar</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Monto ($):</label>
+                        <input type="number" id="montoOperacion" placeholder="Ingrese el valor" required>
+                    </div>
+
+                    <div class="form-group" id="grupoCuotas" style="display: none;">
+                        <label>Número de Cuotas (Solo Tarjeta):</label>
+                        <input type="number" id="numeroCuotas" min="1" value="1">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">Ejecutar Transacción</button>
+                </form>
+
+                <!-- Historial de movimientos -->
+                <div class="movimientos-box">
+                    <h3>Historial de Movimientos</h3>
+                    <ul id="listaMovimientos"></ul>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <!-- FOOTER -->
@@ -269,7 +321,60 @@
         </div>
     </footer>
 
+    <!-- MODAL DE INICIAR SESIÓN -->
+    <div id="modal-login" style="display: none; position: fixed; z-index: 9999; top: 0; left: 0; width: 100%; height: 100vh; background-color: rgba(0,0,0,0.7); justify-content: center; align-items: center;">
+        <div style="background-color: #fff; padding: 25px; border-radius: 12px; width: 90%; max-width: 380px; position: relative; color: #333;">
+            <span id="btn-cerrar-login" style="position: absolute; right: 15px; top: 10px; font-size: 28px; cursor: pointer; color: #666;">&times;</span>
+            <h2 style="margin-bottom: 15px; color: #000; text-align: center;">Iniciar Sesión</h2>
+            
+            <form id="form-login">
+                <div style="margin-bottom: 12px;">
+                    <label style="display:block; font-weight:bold; margin-bottom:4px;">Usuario:</label>
+                    <input type="text" id="login-usuario" required placeholder="Ej: juanperez" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+                </div>
+                <div style="margin-bottom: 18px;">
+                    <label style="display:block; font-weight:bold; margin-bottom:4px;">Contraseña:</label>
+                    <input type="password" id="login-clave" required placeholder="****" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block" style="width: 100%; padding: 10px; background-color: #00a86b; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">Ingresar a Mi Plata</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL DE REGISTRO -->
+    <div id="modal-registro" style="display: none; position: fixed; z-index: 9999; top: 0; left: 0; width: 100%; height: 100vh; background-color: rgba(0,0,0,0.7); justify-content: center; align-items: center;">
+        <div style="background-color: #fff; padding: 25px; border-radius: 12px; width: 90%; max-width: 400px; position: relative; color: #333;">
+            <span id="btn-cerrar-modal" style="position: absolute; right: 15px; top: 10px; font-size: 28px; cursor: pointer; color: #666;">&times;</span>
+            <h2 style="margin-bottom: 15px; color: #000; text-align: center;">Crear Cuenta en Mi Plata</h2>
+            
+            <form id="form-registro">
+                <div style="margin-bottom: 10px;">
+                    <label style="display:block; font-weight:bold; margin-bottom:4px;">Nombre completo:</label>
+                    <input type="text" id="reg-nombre" required placeholder="Ej: Esteban Gómez" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+                </div>
+                <div style="margin-bottom: 10px;">
+                    <label style="display:block; font-weight:bold; margin-bottom:4px;">Cédula:</label>
+                    <input type="text" id="reg-cedula" required placeholder="Ej: 1020304050" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+                </div>
+                <div style="margin-bottom: 10px;">
+                    <label style="display:block; font-weight:bold; margin-bottom:4px;">Usuario:</label>
+                    <input type="text" id="reg-usuario" required placeholder="Ej: esteban123" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+                </div>
+                <div style="margin-bottom: 10px;">
+                    <label style="display:block; font-weight:bold; margin-bottom:4px;">Contraseña:</label>
+                    <input type="password" id="reg-clave" required placeholder="****" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="display:block; font-weight:bold; margin-bottom:4px;">Teléfono:</label>
+                    <input type="tel" id="reg-telefono" required placeholder="Ej: 3001234567" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block" style="width: 100%; padding: 10px; background-color: #00a86b; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">Registrarse e Ingresar</button>
+            </form>
+        </div>
+    </div>
+
     <script src="js/models.js"></script>
     <script src="js/app.js"></script>
+
 </body>
 </html>
