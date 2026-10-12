@@ -147,47 +147,32 @@ if (formLogin) {
 
         const userIngresado = document.getElementById("login-usuario").value.trim().toLowerCase();
         const passIngresada = document.getElementById("login-clave").value.trim();
-
-        // Obtener usuario guardado en memoria
-        const clienteGuardado = cargarClienteDeStorage();
-
-        let esValido = false;
-        let usuarioParaSesion = null;
-
-        // 1. Probar con el cliente registrado en LocalStorage
-        if (clienteGuardado) {
-            const uGuardado = (clienteGuardado.nombreUsuario || clienteGuardado.usuario || "").toLowerCase();
-            const pGuardada = clienteGuardado.clave || clienteGuardado.password || "";
-
-            if (userIngresado === uGuardado && passIngresada === pGuardada) {
-                esValido = true;
-                usuarioParaSesion = clienteGuardado;
-            }
+        let listaUsuarios = JSON.parse(localStorage.getItem('listaClientes')) || []; //carga lista completa de clientes registrados
+        let usuarioEncontrado = listaUsuarios.find(c => c.nombreUsuario.toLowerCase() === userIngresado);//busca el usuario ingresado en la lista de clientes registrados
+        if (!usuarioEncontrado) {
+            alert("Usuario no encontrado. Por favor, regístrese primero.");
+            return;
         }
-
-        // 2. Probar con el usuario por defecto (Juan Perez)
-        if (!esValido && userIngresado === "juanperez" && passIngresada === "1234") {
-            esValido = true;
-            usuarioParaSesion = {
-                nombreCompleto: "Juan Perez",
-                cedula: "1020304050",
-                nombreUsuario: "juanperez",
-                clave: "1234",
-                telefono: "3001234567"
-            };
+        if (usuarioEncontrado.bloqueado) {//verifica si el usuario está bloqueado
+            alert("Su cuenta ha sido bloqueada debido a 3 intentos fallidos. Por favor, comuniquese con el banco.");
+            return;
         }
-
-        if (esValido) {
-            const nombreMostrar = usuarioParaSesion.nombreCompleto || usuarioParaSesion.nombre || "Cliente";
-            alert(`¡Bienvenido de nuevo, ${nombreMostrar}!`);
-            
-            // Guardar en sesión y redireccionar
-            guardarSesionActiva(usuarioParaSesion);
-            formLogin.reset();
-            modalLogin.style.display = "none";
-            window.location.href = "cajero.html";
+        if (usuarioEncontrado.clave === passIngresada) {//valida la contraseña ingresada
+            usuarioEncontrado.intentosFallidos = 0;
+            localStorage.setItem('listaClientes', JSON.stringify(listaUsuarios));
+            alert(`¡Bienvenido de nuevo, ${usuarioEncontrado.nombreCompleto}!`);
+            guardarSesionActiva(usuarioEncontrado);
+            window.location.href = "cajero.html";// guarda la sesión activa y redirige al cajero
         } else {
-            alert("Usuario o contraseña incorrectos. Intente de nuevo.");
+            usuarioEncontrado.intentosFallidos = (usuarioEncontrado.intentosFallidos || 0) + 1;//incrementa el contador de intentos fallidos
+            if (usuarioEncontrado.intentosFallidos >= 3) {
+                usuarioEncontrado.bloqueado = true;
+                alert("Ha excedido el número de intentos. Su cuenta ha sido bloqueada por seguridad.");
+            }else {
+                alert(`Usuario o contraseña incorrectos. Intentos fallidos: ${usuarioEncontrado.intentosFallidos}`);
+            }
+
+            localStorage.setItem('listaClientes', JSON.stringify(listaUsuarios));
         }
     });
 }
@@ -220,20 +205,24 @@ if (formRegistro) {
         const clave = document.getElementById("reg-clave").value.trim();
         const telefono = document.getElementById("reg-telefono").value.trim();
 
-        const nuevoObjetoCliente = {
+        let listaUsuarios = JSON.parse(localStorage.getItem('listaUsuarios')) || [];
+        const usuarioDuplicado = listaUsuarios.some(cliente => (cliente.nombreUsuario.toLowerCase() === usuario.toLowerCase() || cliente.cedula === cedula));
+        if (usuarioDuplicado) {
+            alert("El usuario o la cédula ya están registrados. Por favor, ingrese otro.");
+            return;
+        }
+
+        const nuevoCliente = {
             nombreCompleto: nombre,
-            nombre: nombre,
             cedula: cedula,
             nombreUsuario: usuario,
-            usuario: usuario,
             clave: clave,
-            password: clave,
-            telefono: telefono
+            telefono: telefono,
+            intentosFallidos: 0,
+            bloqueado: false
         };
-
-        // Guardar en almacenamiento local
-        guardarClienteEnStorage(nuevoObjetoCliente);
-
+        listaUsuarios.push(nuevoCliente);
+        localStorage.setItem('listaClientes', JSON.stringify(listaUsuarios));
         alert(`¡Registro exitoso, ${nombre}! Ahora inicia sesión con tu usuario.`);
         
         formRegistro.reset();
@@ -351,3 +340,27 @@ actualizarPantalla();
 
 // Inicializar la pantalla si estamos en el cajero
 actualizarPantalla();
+
+//SECCION 7 FORMULARIO CONTACTO
+const formContacto = document.getElementById("form-contacto");
+if (formContacto) {
+    const btnEnviar = formContacto.querySelector("button");
+    if (btnEnviar) {
+        btnEnviar.addEventListener("click", (e) => {
+            e.preventDefault();
+            const inputs = formContacto.querySelectorAll("input, textarea");
+            let hayVacios = false;
+            inputs.forEach(input => {
+                if (input.value.trim() === "") {
+                    hayVacios = true;
+                }
+            });
+            if (hayVacios) {
+                alert("Por favor complete todos los campos.");
+                return;
+            }
+            alert("¡Gracias por contactarnos! Hemos recibido su mensaje.");
+            formContacto.reset();
+        });
+    }   
+}

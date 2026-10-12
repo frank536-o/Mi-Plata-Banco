@@ -1,21 +1,21 @@
-/* ================= VARIABLES DE COLOR ================= */
-:root {
-    --bg-dark: #0A1C15;         /* Verde oscuro fondo Hero/Footer */
-    --bg-light: #F8F9FA;        /* Fondo claro general */
-    --primary: #00A36C;         /* Verde Esmeralda */
-    --primary-hover: #008055;
-    --secondary: #F4D03F;       /* Amarillo/Dorado Mi Plata */
-    --secondary-hover: #D4AC0D;
-    --text-dark: #212F3D;
-    --text-light: #626567;
-    --text-white: #FFFFFF;
-    
-    /* Colores tarjetas y acentos */
-    --teal: #20B2AA;
-    --pink: #F5B7B1;
-    --blue: #85C1E9;
-    --orange: #F5B041;
-    --purple: #D7BDE2;
+    /* ================= VARIABLES DE COLOR ================= */
+    :root {
+        --bg-dark: #0A1C15;         /* Verde oscuro fondo Hero/Footer */
+        --bg-light: #F8F9FA;        /* Fondo claro general */
+        --primary: #00A36C;         /* Verde Esmeralda */
+        --primary-hover: #008055;
+        --secondary: #F4D03F;       /* Amarillo/Dorado Mi Plata */
+        --secondary-hover: #D4AC0D;
+        --text-dark: #212F3D;
+        --text-light: #626567;
+        --text-white: #FFFFFF;
+        
+        /* Colores tarjetas y acentos */
+        --teal: #20B2AA;
+        --pink: #F5B7B1;
+        --blue: #85C1E9;
+        --orange: #F5B041;
+        --purple: #D7BDE2;
 }
 
 /* ================= RESET Y BÁSICOS ================= */

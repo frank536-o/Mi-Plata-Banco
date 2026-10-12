@@ -84,14 +84,14 @@ class CuentaAhorros extends Cuenta {
             alert("El valor a retirar debe ser mayor que cero.");
             return false;
         }
+        if (valor > this.saldoInicial) {
+            alert("Saldo insuficiente para realizar esta transacción.");
+            return false;
+        }
             const rendimientoInteres = valor * this.tasaInteres;
-            const montoTotalaRetirar = valor - rendimientoInteres;  
-            if (montoTotalaRetirar > this.saldoInicial) {
-                alert("Saldo insuficiente para realizar esta transacción.");
-                return false;
-            }
-            this.saldoInicial -= montoTotalaRetirar;
-            this.registrarMovimiento(`Retiro Ahorros (Ganancia de Interés: +$${rendimientoInteres})`, valor);
+
+            this.saldoInicial = (this.saldoInicial + rendimientoInteres) - valor;
+            this.registrarMovimiento(`Retiro Ahorros (Ganancia de Interés: +$${rendimientoInteres.toFixed(0)})`, valor);
             return true;    
         }
 }

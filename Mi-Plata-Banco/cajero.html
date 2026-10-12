@@ -6,70 +6,200 @@
     <title>Mi Plata - Sucursal Virtual</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Estilos para el cambio de pestañas y layout */
+        .dashboard-layout {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            gap: 20px;
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .sidebar-menu {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            padding: 12px 15px;
+            text-align: left;
+            border-radius: 6px;
+            font-weight: bold;
+            color: #555;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tab-btn:hover {
+            background-color: #f0f0f0;
+            color: #00a86b;
+        }
+
+        .tab-btn.active {
+            background-color: #00a86b;
+            color: white;
+        }
+
+        /* Control de visibilidad de las ventanas */
+        .dash-section {
+            display: none;
+        }
+
+        .dash-section.active-section {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body style="background-color: #f4f6f9; color: #333;">
 
     <!-- BARRA DEL CAJERO -->
-    <header class="navbar" style="background-color: #0d1b2a; padding: 15px 5%;">
+    <header class="navbar" style="background-color: #0d1b2a; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center;">
         <div class="logo">
             <i class="fa-solid fa-building-columns" style="color: #00a86b;"></i>
             <span style="color: white; font-weight: bold; font-size: 20px;">Mi Plata | Sucursal Virtual</span>
         </div>
-        <button id="btn-cerrar-sesion" class="btn btn-outline" style="border-color: #ff4d4d; color: #ff4d4d; cursor: pointer;">
+        <button id="btn-cerrar-sesion" class="btn btn-outline" style="border-color: #ff4d4d; color: #ff4d4d; background: transparent; padding: 8px 15px; border-radius: 6px; cursor: pointer;">
             <i class="fa-solid fa-right-from-bracket"></i> Cerrar Sesión
         </button>
     </header>
 
-    <!-- CONTENEDOR PRINCIPAL DEL CAJERO -->
-    <main style="max-width: 800px; margin: 40px auto; padding: 0 20px;">
-        <div class="cajero-card" style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);">
-            <h2 style="color: #0d1b2a; margin-bottom: 5px;">Bienvenido a tu Banca en Línea</h2>
-            <h3 id="nombreCliente" style="color: #00a86b; margin-bottom: 25px;">Cargando usuario...</h3>
+    <!-- CONTENEDOR PRINCIPAL DEL DASHBOARD -->
+    <div class="dashboard-layout">
+
+        <!-- MENÚ LATERAL (VENTANITAS) -->
+        <aside class="sidebar-menu">
+            <h3 style="color: #0d1b2a; margin-bottom: 10px; font-size: 16px;">Menú Principal</h3>
             
-            <!-- Selector de producto -->
-            <div class="form-group" style="margin-bottom: 20px;">
-                <label style="font-weight: bold; display: block; margin-bottom: 5px;">Seleccionar Producto:</label>
-                <select id="selectorCuenta" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc;">
-                    <option value="ahorros">Cuenta de Ahorros</option>
-                    <option value="corriente">Cuenta Corriente</option>
-                    <option value="tarjeta">Tarjeta de Crédito</option>
-                </select>
-            </div>
+            <button class="tab-btn active" data-target="vista-inicio">
+                <i class="fa-solid fa-house"></i> Inicio / Resumen
+            </button>
+            <button class="tab-btn" data-target="vista-transacciones">
+                <i class="fa-solid fa-money-bill-transfer"></i> Transacciones
+            </button>
+            <button class="tab-btn" data-target="vista-movimientos">
+                <i class="fa-solid fa-list-check"></i> Movimientos
+            </button>
+            <button class="tab-btn" data-target="vista-perfil">
+                <i class="fa-solid fa-user"></i> Mi Perfil
+            </button>
+        </aside>
 
-            <!-- Pantalla de saldo -->
-            <div class="saldo-box" style="background: #eef9f5; padding: 20px; border-radius: 8px; border-left: 5px solid #00a86b; margin-bottom: 25px;">
-                <h4 id="saldoActual" style="font-size: 22px; color: #0d1b2a; margin: 0;">$ 0 COP</h4>
-            </div>
+        <!-- CONTENIDO PRINCIPAL DINÁMICO -->
+        <main>
+            <div class="cajero-card" style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);">
+                
+                <!-- ENCABEZADO DEL USUARIO Y SELECTOR GLOBAL DE PRODUCTO -->
+                <h2 style="color: #0d1b2a; margin-bottom: 5px;">Bienvenido a tu Banca en Línea</h2>
+                <h3 id="nombreCliente" style="color: #00a86b; margin-bottom: 25px;">Cargando usuario...</h3>
 
-            <!-- Formulario de operaciones -->
-            <form id="formOperacion">
-                <div class="form-group" style="margin-bottom: 15px;">
-                    <label style="font-weight: bold; display: block; margin-bottom: 5px;">Tipo de Operación:</label>
-                    <select id="tipoOperacion" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc;">
-                        <!-- JS insertará automáticamente las opciones según la cuenta elegida -->
+                <!-- Selector de producto (aplica a todo el sistema) -->
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label style="font-weight: bold; display: block; margin-bottom: 5px;">Seleccionar Producto Activo:</label>
+                    <select id="selectorCuenta" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc;">
+                        <option value="ahorros">Cuenta de Ahorros</option>
+                        <option value="corriente">Cuenta Corriente</option>
+                        <option value="tarjeta">Tarjeta de Crédito</option>
                     </select>
                 </div>
 
-                <div class="form-group" style="margin-bottom: 15px;">
-                    <label style="font-weight: bold; display: block; margin-bottom: 5px;">Monto ($):</label>
-                    <input type="number" id="montoOperacion" placeholder="Ingrese el valor" required style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc;">
+                <!-- PANTALLA DE SALDO (Póliza/Tarjeta fija arriba) -->
+                <div class="saldo-box" style="background: #eef9f5; padding: 20px; border-radius: 8px; border-left: 5px solid #00a86b; margin-bottom: 25px;">
+                    <span style="font-size: 14px; color: #666;">Saldo / Cupo Disponible:</span>
+                    <h4 id="saldoActual" style="font-size: 24px; color: #0d1b2a; margin: 5px 0 0 0;">$ 0 COP</h4>
                 </div>
 
-                <div class="form-group" id="grupoCuotas" style="display: none; margin-bottom: 15px;">
-                    <label style="font-weight: bold; display: block; margin-bottom: 5px;">Número de Cuotas (Solo Tarjeta):</label>
-                    <input type="number" id="numeroCuotas" min="1" value="1" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc;">
-                </div>
+                <!-- ================= VENTANA 1: INICIO ================= -->
+                <section id="vista-inicio" class="dash-section active-section">
+                    <h3 style="color: #0d1b2a; margin-bottom: 10px;">Resumen del Producto</h3>
+                    <p style="color: #666;">Selecciona una opción del menú lateral para operar o consultar tu historial.</p>
+                </section>
 
-                <button type="submit" class="btn btn-primary btn-block" style="width: 100%; padding: 12px; background-color: #00a86b; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer;">Ejecutar Transacción</button>
-            </form>
+                <!-- ================= VENTANA 2: TRANSACCIONES ================= -->
+                <section id="vista-transacciones" class="dash-section">
+                    <h3 style="color: #0d1b2a; margin-bottom: 15px; border-bottom: 2px solid #eee; padding-bottom: 8px;">Realizar Operación</h3>
+                    
+                    <form id="formOperacion">
+                        <div class="form-group" style="margin-bottom: 15px;">
+                            <label style="font-weight: bold; display: block; margin-bottom: 5px;">Tipo de Operación:</label>
+                            <select id="tipoOperacion" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc;">
+                                <!-- JS insertará automáticamente las opciones según la cuenta elegida -->
+                            </select>
+                        </div>
 
-            <!-- Historial de movimientos -->
-            <div class="movimientos-box" style="margin-top: 30px;">
-                <h3 style="color: #0d1b2a; border-bottom: 2px solid #eee; padding-bottom: 8px;">Historial de Movimientos</h3>
-                <ul id="listaMovimientos" style="list-style: none; padding: 0; margin-top: 15px;"></ul>
+                        <div class="form-group" style="margin-bottom: 15px;">
+                            <label style="font-weight: bold; display: block; margin-bottom: 5px;">Monto ($):</label>
+                            <input type="number" id="montoOperacion" placeholder="Ingrese el valor" required style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc;">
+                        </div>
+
+                        <div class="form-group" id="grupoCuotas" style="display: none; margin-bottom: 15px;">
+                            <label style="font-weight: bold; display: block; margin-bottom: 5px;">Número de Cuotas (Solo Tarjeta):</label>
+                            <input type="number" id="numeroCuotas" min="1" value="1" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc;">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block" style="width: 100%; padding: 12px; background-color: #00a86b; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer;">Ejecutar Transacción</button>
+                    </form>
+                </section>
+
+                <!-- ================= VENTANA 3: MOVIMIENTOS ================= -->
+                <section id="vista-movimientos" class="dash-section">
+                    <h3 style="color: #0d1b2a; border-bottom: 2px solid #eee; padding-bottom: 8px;">Historial de Movimientos</h3>
+                    <ul id="listaMovimientos" style="list-style: none; padding: 0; margin-top: 15px;">
+                        <!-- JS insertará los movimientos aquí -->
+                    </ul>
+                </section>
+
+                <!-- ================= VENTANA 4: PERFIL DE USUARIO ================= -->
+                <section id="vista-perfil" class="dash-section">
+                    <h3 style="color: #0d1b2a; border-bottom: 2px solid #eee; padding-bottom: 8px;">Información del Perfil</h3>
+                    <div style="margin-top: 15px; line-height: 1.8;">
+                        <p><strong>Titular:</strong> <span id="perfilNombre">Cargando...</span></p>
+                        <p><strong>Documento / ID:</strong> <span id="perfilId">Cargando...</span></p>
+                        <p><strong>Estado de Cuenta:</strong> <span style="color: #00a86b; font-weight: bold;">Activa</span></p>
+                    </div>
+                </section>
+
             </div>
-        </div>
-    </main>
+        </main>
+    </div>
+
+    <!-- CÓDIGO JS PARA EL CAMBIO DE PESTAÑAS (VENTANAS) -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const tabs = document.querySelectorAll(".tab-btn");
+            const sections = document.querySelectorAll(".dash-section");
+
+            tabs.forEach(tab => {
+                tab.addEventListener("click", () => {
+                    // Quitar clase activa a todos los botones y secciones
+                    tabs.forEach(t => t.classList.remove("active"));
+                    sections.forEach(s => s.classList.remove("active-section"));
+
+                    // Activar pestaña y sección seleccionada
+                    tab.classList.add("active");
+                    const target = tab.getAttribute("data-target");
+                    document.getElementById(target).classList.add("active-section");
+                });
+            });
+        });
+    </script>
 
     <script src="js/models.js"></script>
     <script src="js/app.js"></script>
