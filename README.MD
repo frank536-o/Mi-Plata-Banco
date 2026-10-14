@@ -172,10 +172,6 @@ Existe la necesidad de un simulador local que evalúe correctamente cuándo apro
 ## DIAGRAMAS DEL PROYECTO
 
 ### Diagrama de Clase UML
-*(Asegúrate de incluir la imagen `uml_diagram.png` en la misma carpeta)*  
-![Diagrama UML](./docs/uml_diagram.png)
-
----
 
 ## CRONOGRAMA DE TRABAJO
 
